@@ -363,9 +363,9 @@ class MiniPreviewManager {
         // Map Titles to Video URLs (Normalized Mapping)
         this.videoMap = {
             "Tehran": "assets/videos/Tehran.mp4",
-            "H/Jack": "assets/videos/Hijack.mp4",
-            "Hijack": "assets/videos/Hijack.mp4",
-            "Pluribus": "assets/videos/Pluribus.mp4",
+            "H/Jack": "assets/videos/hijack.mp4",
+            "Hijack": "assets/videos/hijack.mp4",
+            "Pluribus": "assets/videos/pluribus.mp4",
             "Ted Lasso": "assets/videos/TedLasso.mp4", // No local asset in list, using placeholder
             "The Morning Show": "assets/videos/The Morning Show.mp4",
             "Severance": "assets/videos/Severance.mp4",
