@@ -370,7 +370,7 @@ class MiniPreviewManager {
             "The Morning Show": "assets/videos/The Morning Show.mp4",
             "Severance": "assets/videos/Severance.mp4",
             "Slow Horses": "assets/videos/Slow Horses.mp4",
-            "Monarch": "assets/videos/Monarch.mp4",
+            "Monarch": "assets/videos/monarch.mp4",
             "Invasion": "assets/videos/Invasion.mp4",
             "Silo": "assets/videos/Silo.mp4",
             "F1 : The Movie": "assets/videos/F1.mp4",
