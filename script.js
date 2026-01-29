@@ -1,13 +1,13 @@
 const POSTER_WALL_IMAGES = [
-    "slide-4.webp",
-    "slide-2.webp",
-    "slide-3.webp",
-    "stranger-things.jpg",
-    "slide-5.webp",
-    "slide-6.webp",
-    "slide-7.webp",
-    "slide-9.webp",
-    "slide-10.webp"
+    "assets/carousels/slide-4.webp",
+    "assets/carousels/slide-2.webp",
+    "assets/carousels/slide-3.webp",
+    "assets/carousels/stranger-things.jpg",
+    "assets/carousels/slide-5.webp",
+    "assets/carousels/slide-6.webp",
+    "assets/carousels/slide-7.webp",
+    "assets/carousels/slide-9.webp",
+    "assets/carousels/slide-10.webp"
 ];
 const FEATURE_SLIDES = [
     {
@@ -16,7 +16,7 @@ const FEATURE_SLIDES = [
         title: "Apple TV+ Intro",
         meta: "",
         desc: "Stream hundreds of exclusive shows and movies, with new releases every week.",
-        bg: "slide-1.webp",
+        bg: "assets/carousels/slide-1.webp",
         logo: "Get Apple TV+ free for 1 week.",
         video: "" // 3D wall doesn't use this
     },
@@ -26,7 +26,7 @@ const FEATURE_SLIDES = [
         title: "Stranger Things",
         meta: "TV Show  · Sci-Fi · Horror · Mystery",
         desc: "set in 1980s Indiana, where the disappearance of a young boy coincides with the appearance of a girl with psychokinetic powers With a Group of friends.",
-        bg: "stranger-things.jpg",
+        bg: "assets/carousels/stranger-things.jpg",
         logo: "Stranger Things",
         video: "Stranger Things.mp4"
     }, {
@@ -35,7 +35,7 @@ const FEATURE_SLIDES = [
         title: "The Morning Show",
         meta: "TV Show  · Drama",
         desc: "Scandals, affairs, conspiracies. And that's just the news team.",
-        bg: "slide-2.webp",
+        bg: "assets/carousels/slide-2.webp",
         logo: "THE MORNING SHOW",
         video: "The Morning Show.mp4"
     },
@@ -45,7 +45,7 @@ const FEATURE_SLIDES = [
         title: "F1",
         meta: "Movie · Action · Drama",
         desc: "A racing legend returns to the track—and clashes with a rising hotshot—in this epic thrill ride.",
-        bg: "slide-3.webp",
+        bg: "assets/carousels/slide-3.webp",
         logo: "BRAD PITT F1",
         video: "F1.mp4"
     },
@@ -55,7 +55,7 @@ const FEATURE_SLIDES = [
         title: "The Studio",
         meta: "TV Show · Comedy",
         desc: "Seth Rogen stars in an outrageous showbiz satire.",
-        bg: "slide-4.webp",
+        bg: "assets/carousels/slide-4.webp",
         logo: "The Studio",
         video: "The Studio.mp4"
     },
@@ -65,7 +65,7 @@ const FEATURE_SLIDES = [
         title: "Hijack",
         meta: "TV Show · Thriller · Drama",
         desc: "This time, the suspense is off the rails.",
-        bg: "slide-5.webp",
+        bg: "assets/carousels/slide-5.webp",
         logo: "H/JACK",
         video: "hijack.mp4"
     },
@@ -75,7 +75,7 @@ const FEATURE_SLIDES = [
         title: "Severance",
         meta: "TV Show · Thriller · Sci-Fi",
         desc: "We're all family here.",
-        bg: "slide-6.webp",
+        bg: "assets/carousels/slide-6.webp",
         logo: "SEVERANCE",
         video: "Severance.mp4"
     },
@@ -85,7 +85,7 @@ const FEATURE_SLIDES = [
         title: "Monarch : Legacy of Monsters",
         meta: "TV Show · Adventure · Sci-Fi",
         desc: "The Monsterverse Rages on as Godzilla and Kong Clash With a Colossal New Threat : Titan X.",
-        bg: "slide-7.webp",
+        bg: "assets/carousels/slide-7.webp",
         logo: "Monarch : Legacy of Monsters",
         video: "monarch.mp4"
     },
@@ -95,7 +95,7 @@ const FEATURE_SLIDES = [
         title: "Pluribus",
         meta: "TV Show · Drama · Sci-Fi",
         desc: "The Most Miserable Person on the Earth Must Save The World From Happiness. ",
-        bg: "slide-8.webp",
+        bg: "assets/carousels/slide-8.webp",
         logo: "Pluribus",
         video: "pluribus.mp4"
     },
@@ -105,7 +105,7 @@ const FEATURE_SLIDES = [
         title: "Tehran",
         meta: "· Thriller · Action",
         desc: "A Secret Agent Embarks On Her Most Dangerous Mission Yet. ",
-        bg: "slide-9.webp",
+        bg: "assets/carousels/slide-9.webp",
         logo: "Tehran",
         video: "Tehran.mp4"
     },
@@ -115,7 +115,7 @@ const FEATURE_SLIDES = [
         title: "Slow Horses",
         meta: "· Thriller · Drama",
         desc: "Gary Oldman Leads a Team of MI5 rejects who get the job done.Not well, but done . ",
-        bg: "slide-10.webp",
+        bg: "assets/carousels/slide-10.webp",
         logo: "Slow Horses",
         video: "Slow Horses.mp4"
     },
@@ -362,27 +362,27 @@ class MiniPreviewManager {
         this.cards = document.querySelectorAll('.top10-item, .list-item-portrait, .list-item');
         // Map Titles to Video URLs (Normalized Mapping)
         this.videoMap = {
-            "Tehran": "Tehran.mp4",
-            "H/Jack": "hijack.mp4",
-            "Hijack": "hijack.mp4",
-            "Pluribus": "pluribus.mp4",
-            "Ted Lasso": "TedLasso.mp4", // No local asset in list, using placeholder
-            "The Morning Show": "The Morning Show.mp4",
-            "Severance": "Severance.mp4",
-            "Slow Horses": "Slow Horses.mp4",
-            "Monarch": "monarch.mp4",
-            "Invasion": "Invasion.mp4",
-            "Silo": "Silo.mp4",
-            "F1 : The Movie": "F1.mp4",
-            "The Family Plan 2": "The Family Plan 2.mp4",
-            "The Family Plan": "The Family Plan.mp4",
-            "Wolfs": "WOLFS.mp4",
-            "Ghosted": "Ghosted.mp4",
-            "Fountain Of Youth": "Fountain of Youth.mp4",
-            "The Gorge": "The Gorge.mp4",
-            "Greyhound": "GREYHOUND.mp4",
-            "The Lost Bus": "The Lost Bus.mp4",
-            "Killers Of Flower Moon": "Killers of the Flower Moon.mp4"
+            "Tehran": "assets/videos/Tehran.mp4",
+            "H/Jack": "assets/videos/Hijack.mp4",
+            "Hijack": "assets/videos/Hijack.mp4",
+            "Pluribus": "assets/videos/Pluribus.mp4",
+            "Ted Lasso": "assets/videos/TedLasso.mp4", // No local asset in list, using placeholder
+            "The Morning Show": "assets/videos/The Morning Show.mp4",
+            "Severance": "assets/videos/Severance.mp4",
+            "Slow Horses": "assets/videos/Slow Horses.mp4",
+            "Monarch": "assets/videos/Monarch.mp4",
+            "Invasion": "assets/videos/Invasion.mp4",
+            "Silo": "assets/videos/Silo.mp4",
+            "F1 : The Movie": "assets/videos/F1.mp4",
+            "The Family Plan 2": "assets/videos/The Family Plan 2.mp4",
+            "The Family Plan": "assets/videos/The Family Plan.mp4",
+            "Wolfs": "assets/videos/WOLFS.mp4",
+            "Ghosted": "assets/videos/Ghosted.mp4",
+            "Fountain Of Youth": "assets/videos/Fountain of Youth.mp4",
+            "The Gorge": "assets/videos/The Gorge.mp4",
+            "Greyhound": "assets/videos/GREYHOUND.mp4",
+            "The Lost Bus": "assets/videos/The Lost Bus.mp4",
+            "Killers Of Flower Moon": "assets/videos/Killers of the Flower Moon.mp4"
         };
 
         this.init();
