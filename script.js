@@ -358,15 +358,12 @@ class PosterWall {
 // --- NEW: Mini Preview Manager (For Top 10 / Small Cards) ---
 class MiniPreviewManager {
     constructor() {
-        // Target specifically the top10 items and portrait lists (Top 10 / New Releases)
-        this.cards = document.querySelectorAll('.top10-item, .list-item-portrait, .list-item');
-        // Map Titles to Video URLs (Normalized Mapping)
         this.videoMap = {
             "Tehran": "assets/videos/Tehran.mp4",
             "H/Jack": "assets/videos/hijack.mp4",
             "Hijack": "assets/videos/hijack.mp4",
             "Pluribus": "assets/videos/pluribus.mp4",
-            "Ted Lasso": "assets/videos/TedLasso.mp4", // No local asset in list, using placeholder
+            "Ted Lasso": "assets/videos/TedLasso.mp4",
             "The Morning Show": "assets/videos/The Morning Show.mp4",
             "Severance": "assets/videos/Severance.mp4",
             "Slow Horses": "assets/videos/Slow Horses.mp4",
@@ -384,80 +381,72 @@ class MiniPreviewManager {
             "The Lost Bus": "assets/videos/The Lost Bus.mp4",
             "Killers Of Flower Moon": "assets/videos/Killers of the Flower Moon.mp4"
         };
-
         this.init();
     }
 
     init() {
         if (window.matchMedia('(hover: none)').matches) return;
+        const cards = document.querySelectorAll('.top10-item, .list-item-portrait, .list-item');
+        this.initCards(cards);
+    }
 
-        this.cards.forEach(card => {
-            let videoUrl = card.dataset.videoSrc;
+    initCards(cards) {
+        cards.forEach(card => this.setupCard(card));
+    }
 
-            if (!videoUrl) {
-                const titleEl = card.querySelector('.top10-title, .portrait-title');
-                if (titleEl) {
-                    const title = titleEl.textContent.trim();
-                    videoUrl = this.videoMap[title];
-                }
+    initForContainer(container) {
+        const cards = container.querySelectorAll('.top10-item, .list-item-portrait, .list-item');
+        this.initCards(cards);
+    }
+
+    setupCard(card) {
+        let videoUrl = card.dataset.videoSrc;
+        if (!videoUrl) {
+            const titleEl = card.querySelector('.top10-title, .portrait-title');
+            if (titleEl) {
+                const title = titleEl.textContent.trim();
+                videoUrl = this.videoMap[title];
             }
+        }
+        if (!videoUrl) return;
 
-            if (!videoUrl) return;
-
-
-            const video = document.createElement('video');
+        // Check for existing video (clones will have it)
+        let video = card.querySelector('.mini-card-video');
+        if (!video) {
+            video = document.createElement('video');
             video.className = 'mini-card-video';
             video.src = videoUrl;
             video.muted = true;
             video.loop = true;
             video.playsInline = true;
-            video.preload = "none"; // Critical for performance
+            video.preload = "none";
 
-            // Insert: Before the overlay so it's behind text/rank but above img
-            // Top 10 structure: Rank > Img > <VIDEO_HERE> > Overlay
             const img = card.querySelector('img');
-            if (img) {
-                img.insertAdjacentElement('afterend', video);
-            } else {
-                card.appendChild(video);
-            }
+            if (img) img.insertAdjacentElement('afterend', video);
+            else card.appendChild(video);
+        }
 
-            // 3. Interaction Logic
-            let playTimeout;
-            let playPromise;
-
-            card.addEventListener('mouseenter', () => {
-                playTimeout = setTimeout(() => {
-                    // Mute/Pause others
-                    document.querySelectorAll('video').forEach(v => {
-                        if (v !== video && !v.paused) {
-                            v.pause();
-                            v.style.opacity = '0';
-                        }
-                    });
-
-                    video.style.opacity = '1';
-                    playPromise = video.play();
-
-                    if (playPromise !== undefined) {
-                        playPromise.catch(() => { });
+        let playTimeout;
+        card.addEventListener('mouseenter', () => {
+            playTimeout = setTimeout(() => {
+                document.querySelectorAll('video').forEach(v => {
+                    if (v !== video && !v.paused && v.classList.contains('mini-card-video')) {
+                        v.pause();
+                        v.style.opacity = '0';
                     }
-                }, 1200); // 1.2-second delay
-            });
+                });
+                video.style.opacity = '1';
+                video.play().catch(() => { });
+            }, 1200);
+        });
 
-            card.addEventListener('mouseleave', () => {
-                if (playTimeout) {
-                    clearTimeout(playTimeout);
-                    playTimeout = null;
-                }
-
-                // Fast fade out
-                video.style.opacity = '0';
-                setTimeout(() => {
-                    video.pause();
-                    video.currentTime = 0;
-                }, 500); // Wait for CSS transition
-            });
+        card.addEventListener('mouseleave', () => {
+            if (playTimeout) clearTimeout(playTimeout);
+            video.style.opacity = '0';
+            setTimeout(() => {
+                video.pause();
+                video.currentTime = 0;
+            }, 500);
         });
     }
 }
@@ -465,7 +454,7 @@ class MiniPreviewManager {
 document.addEventListener('DOMContentLoaded', () => {
     new MainHeaderCarousel();
     new PosterWall();
-    new MiniPreviewManager();
+    const miniPreview = new MiniPreviewManager();
 
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -474,6 +463,66 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
         };
     });
+
+
+    // --- NEW: Section Detail Overlay Manager ---
+    class SectionOverlayManager {
+        constructor(miniPreview) {
+            this.overlay = document.getElementById('section-overlay');
+            this.grid = document.getElementById('section-detail-grid');
+            this.title = document.getElementById('section-detail-title');
+            this.closeBtn = document.getElementById('section-overlay-close');
+            this.miniPreview = miniPreview;
+            this.init();
+        }
+
+        init() {
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    const sectionName = title.textContent.replace('chevron_right', '').trim();
+                    const sectionRow = title.closest('.content-row');
+                    const cards = sectionRow.querySelectorAll('.top10-item, .list-item-portrait, .list-item');
+                    this.open(sectionName, cards);
+                });
+            });
+
+            this.closeBtn.addEventListener('click', () => this.close());
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.overlay.classList.contains('active')) this.close();
+            });
+            this.overlay.addEventListener('click', (e) => {
+                if (e.target === this.overlay) this.close();
+            });
+        }
+
+        open(name, cards) {
+            this.title.textContent = name;
+            this.grid.innerHTML = '';
+            cards.forEach((card, index) => {
+                const clone = card.cloneNode(true);
+                clone.classList.add('detail-card');
+                // Remove group-hover if it causes issues, but keep it for style
+                clone.style.transitionDelay = `${index * 0.04}s`;
+                this.grid.appendChild(clone);
+            });
+
+            this.overlay.classList.add('active');
+            document.body.classList.add('search-active');
+
+            // Re-bind video previews for the new clones
+            if (this.miniPreview) {
+                this.miniPreview.initForContainer(this.grid);
+            }
+        }
+
+        close() {
+            this.overlay.classList.remove('active');
+            document.body.classList.remove('search-active');
+            setTimeout(() => { this.grid.innerHTML = ''; }, 600);
+        }
+    }
+
+    new SectionOverlayManager(miniPreview);
 
     // --- Apple-Style Search Manager ---
     class SearchManager {
