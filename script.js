@@ -28,7 +28,7 @@ const FEATURE_SLIDES = [
         desc: "set in 1980s Indiana, where the disappearance of a young boy coincides with the appearance of a girl with psychokinetic powers With a Group of friends.",
         bg: "assets/carousels/stranger-things.jpg",
         logo: "Stranger Things",
-        video: "Stranger Things.mp4"
+        video: "assets/videos/Stranger Things.mp4"
     }, {
         id: "morning-show",
         type: 'image',
@@ -37,7 +37,7 @@ const FEATURE_SLIDES = [
         desc: "Scandals, affairs, conspiracies. And that's just the news team.",
         bg: "assets/carousels/slide-2.webp",
         logo: "THE MORNING SHOW",
-        video: "The Morning Show.mp4"
+        video: "assets/videos/The Morning Show.mp4"
     },
     {
         id: "f1",
@@ -47,7 +47,7 @@ const FEATURE_SLIDES = [
         desc: "A racing legend returns to the track—and clashes with a rising hotshot—in this epic thrill ride.",
         bg: "assets/carousels/slide-3.webp",
         logo: "BRAD PITT F1",
-        video: "F1.mp4"
+        video: "assets/videos/F1.mp4"
     },
     {
         id: "studio",
@@ -57,7 +57,7 @@ const FEATURE_SLIDES = [
         desc: "Seth Rogen stars in an outrageous showbiz satire.",
         bg: "assets/carousels/slide-4.webp",
         logo: "The Studio",
-        video: "The Studio.mp4"
+        video: "assets/videos/The Studio.mp4"
     },
     {
         id: "hijack",
@@ -67,7 +67,7 @@ const FEATURE_SLIDES = [
         desc: "This time, the suspense is off the rails.",
         bg: "assets/carousels/slide-5.webp",
         logo: "H/JACK",
-        video: "hijack.mp4"
+        video: "assets/videos/hijack.mp4"
     },
     {
         id: "severance",
@@ -77,7 +77,7 @@ const FEATURE_SLIDES = [
         desc: "We're all family here.",
         bg: "assets/carousels/slide-6.webp",
         logo: "SEVERANCE",
-        video: "Severance.mp4"
+        video: "assets/videos/Severance.mp4"
     },
     {
         id: "monarch",
@@ -87,7 +87,7 @@ const FEATURE_SLIDES = [
         desc: "The Monsterverse Rages on as Godzilla and Kong Clash With a Colossal New Threat : Titan X.",
         bg: "assets/carousels/slide-7.webp",
         logo: "Monarch : Legacy of Monsters",
-        video: "monarch.mp4"
+        video: "assets/videos/monarch.mp4"
     },
     {
         id: "pluribus",
@@ -97,7 +97,7 @@ const FEATURE_SLIDES = [
         desc: "The Most Miserable Person on the Earth Must Save The World From Happiness. ",
         bg: "assets/carousels/slide-8.webp",
         logo: "Pluribus",
-        video: "pluribus.mp4"
+        video: "assets/videos/pluribus.mp4"
     },
     {
         id: "tehran",
@@ -107,7 +107,7 @@ const FEATURE_SLIDES = [
         desc: "A Secret Agent Embarks On Her Most Dangerous Mission Yet. ",
         bg: "assets/carousels/slide-9.webp",
         logo: "Tehran",
-        video: "Tehran.mp4"
+        video: "assets/videos/Tehran.mp4"
     },
     {
         id: "slow-horses",
@@ -117,7 +117,7 @@ const FEATURE_SLIDES = [
         desc: "Gary Oldman Leads a Team of MI5 rejects who get the job done.Not well, but done . ",
         bg: "assets/carousels/slide-10.webp",
         logo: "Slow Horses",
-        video: "Slow Horses.mp4"
+        video: "assets/videos/Slow Horses.mp4"
     },
 ];
 
