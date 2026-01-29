@@ -222,7 +222,7 @@ class MainHeaderCarousel {
             if (!content) return;
 
             content.addEventListener('mouseenter', () => {
-               
+
                 this.syncActiveSlide();
             });
 
@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderResults(results, query) {
             this.resultsGrid.innerHTML = '';
-            
+
             if (results.length === 0) {
                 this.noResultsView.classList.remove('hidden');
                 this.searchTermDisplay.textContent = query;
